@@ -1,0 +1,9 @@
+@media print{
+table {
+  border-collapse : collapse;
+}
+td,th{
+  border-bottom : 1px solid #000;
+}
+}
+
