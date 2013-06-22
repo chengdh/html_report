@@ -16,5 +16,5 @@
 `UPDATE ir_act_report_xml SET report_type='html' WHERE report_type='pdf'`
 
 ## TODOS
-增加导出到excel功能
-可将系统中所有的报表直接转换为html
+- 增加导出到excel功能
+- 不同报表的css样式如何处理
