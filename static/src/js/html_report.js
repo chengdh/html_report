@@ -1,4 +1,7 @@
 openerp.html_report = function(instance){
+  String.prototype.endswith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+  };
   _.extend(instance.web.ActionManager.prototype,{
     //重写report方法
     ir_actions_report_xml: function(action, options) {
@@ -44,7 +47,7 @@ openerp.html_report = function(instance){
             instance.web.unblockUI();
           });
         };
-        if(action.report_type == 'html' || action.report_type == 'html2html' || action.report_type == 'mako2html')
+        if((action.report_type == 'html' || action.report_type == 'html2html' || action.report_type == 'mako2html') && !action.report_name.endswith("xls"))
           return ajax_get_report();
         else
           return ajax_get_file();
