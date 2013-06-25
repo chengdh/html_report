@@ -9,6 +9,15 @@
 - 定义report
 定义openerp report的方式,参考[openerp report doc](https://doc.openerp.com/6.1/developer/05_reports/)
 
+## 定义导出到excel类型的报表
+- 将report.xml中定义的report_name的名字最后加上.xls 就这么简单,可以了 :)
+- 例如
+`
+      <report id="report_purchase_order_excel" model="purchase.order"
+        name="purchase.order.new.xls" file="custom_purchase/report/purchase_order.mako"
+        usage="default" string="export purchase order to excel" report_type='mako2html' header='0' />
+ `
+
 ## **注意**
 - 如果需要使用mako模版的报表,注意在定义 `report_type`时,需要将其值设为`mako2html`
 - 如果需要使用rml模版的报表,注意在定义 `report_type`时,需要将其值设为`html`
