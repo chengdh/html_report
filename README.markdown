@@ -10,7 +10,10 @@
 定义openerp report的方式,参考[openerp report doc](https://doc.openerp.com/6.1/developer/05_reports/)
 
 ## 定义导出到excel类型的报表
-- 将report.xml中定义的report_name的名字最后加上.xls 就这么简单,可以了 :)
+- 报表的report_type设置为html,mako2html,html2html之一
+- 将报表的report_name后边加上.xls
+- 导出时系统只是将生成的html中的table的内容自动导出，其他的内容不能自动导出
+- 这个功能对于需要导出表格数据的需求，还是很有用处的
 - 例如
 `
       <report id="report_purchase_order_excel" model="purchase.order"
@@ -25,5 +28,4 @@
 `UPDATE ir_act_report_xml SET report_type='html' WHERE report_type='pdf'`
 
 ## TODOS
-- 增加导出到excel功能
 - 不同报表的css样式如何处理
