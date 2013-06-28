@@ -10,6 +10,8 @@
 定义openerp report的方式,参考[openerp report doc](https://doc.openerp.com/6.1/developer/05_reports/)
 
 ## 定义导出到excel类型的报表
+- 导出到excel功能目前只对自己开发的报表可用,如果想将openerp中的原有报表导出,
+则处理会相对复杂些,需要override原报表,方法可以参考:[报表override方法](http://anybox.fr/blog/openerp-how-to-use-a-custom-rml-report-parser-class)
 - 报表的report_type设置为html,mako2html,html2html之一
 - 将报表的report_name后边加上.xls
 - 导出时系统只是将生成的html中的table的内容自动导出，其他的内容不能自动导出

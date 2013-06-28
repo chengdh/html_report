@@ -84,9 +84,18 @@ def report_index(self, req, action, token):
       report_struct['format'], 'octet-stream')
 
 
-  '''
   file_name = action.get('name', 'report')
-  if 'name' not in action:
+  #判断是否是导出到excel
+  if file_name.endswith('xls') and action['report_type'] in ['html','mako2html','html2html']:
+    file_name = action.get('report_name', 'report')
+    _logger.debug("report = %s" % report)
+    etree_obj = etree.HTML(report)
+    #获取要导出的table
+    export_excels = [etree.tostring(t) for t in etree_obj.xpath(u"//table")]
+    _logger.debug("export excels = %s" % export_excels)
+    report = "".join(export_excels)
+  else:
+    if 'name' not in action:
       reports = req.session.model('ir.actions.report.xml')
       res_id = reports.search([('report_name', '=', action['report_name']),],
                               0, False, False, context)
@@ -94,18 +103,10 @@ def report_index(self, req, action, token):
           file_name = reports.read(res_id[0], ['name'], context)['name']
       else:
           file_name = action['report_name']
-  file_name = '%s.%s' % (file_name, report_struct['format'])
-  '''
-  file_name = action.get('report_name', 'report')
 
-  #判断是否是导出到excel
-  if file_name.endswith('xls') and action['report_type'] in ['html','mako2html','html2html']:
-    _logger.debug("report = %s" % report)
-    etree_obj = etree.HTML(report)
-    #获取要导出的table
-    export_excels = [etree.tostring(t) for t in etree_obj.xpath(u"//table")]
-    _logger.debug("export excels = %s" % export_excels)
-    report = "".join(export_excels)
+    file_name = '%s.%s' % (file_name, report_struct['format'])
+
+
 
   return req.make_response(report,
        headers=[
