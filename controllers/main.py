@@ -84,9 +84,9 @@ def report_index(self, req, action, token):
       report_struct['format'], 'octet-stream')
 
 
-  file_name = action.get('name', 'report')
+  file_name =  None
   #判断是否是导出到excel
-  if file_name.endswith('xls') and action['report_type'] in ['html','mako2html','html2html']:
+  if action.get('report_name').endswith('xls') and action['report_type'] in ['html','mako2html','html2html']:
     file_name = action.get('report_name', 'report')
     _logger.debug("report = %s" % report)
     etree_obj = etree.HTML(report)
