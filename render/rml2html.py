@@ -33,5 +33,3 @@ def render(self, node):
   return result.encode('utf-8').replace('"',"\'").replace('°','&deg;')
 
 flowable.render = render
-
-
